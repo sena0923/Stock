@@ -25,7 +25,7 @@
   </form>
 
   <br>
-  <a href="./入居者新規登録.jsp">新規登録</a>
+  <a href="入居者/入居者新規登録.jsp">新規登録</a>
 
   <script">
 	  document.getElementById("loginForm").addEventListener("submit", function(event) {

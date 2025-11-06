@@ -27,7 +27,7 @@
   </form>
 
   <br>
-  <a href="./親族情報入力画面.jsp">新規登録</a>
+  <a href="親族/親族新規登録.jsp">新規登録</a>
 
 </body>
 </html>
