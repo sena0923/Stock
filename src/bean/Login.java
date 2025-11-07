@@ -1,7 +1,11 @@
 package bean;
 
 import java.io.Serializable;
+
+
 					/*** 介護士テーブル＋入居者テーブル＋親族テーブル+コーステーブル*/
+
+
 public class Login implements Serializable {
 	/**職員番号**/
 	private char cg_num;
