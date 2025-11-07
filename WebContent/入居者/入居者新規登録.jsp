@@ -1,13 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<link rel="stylesheet" href="CSS/style.css">
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入居者新規登録画面</title>
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
 
-<main>
-  <h1>入居者情報入力画面</h1>
+  <main>
+    <h1>新規登録画面</h1>
 
-  <form id="residentForm">
+    <form id="residentForm" action="入居者新規登録完了.jsp" method="post">
 
-    <!-- コース選択 -->
-    <div class="row">
+      <!-- コース選択 -->
       <label>コースを選んでください</label>
       <div class="radio-group column">
         <div class="radio-item">
@@ -19,18 +26,16 @@
           <label for="radio-b">要介護コース</label>
         </div>
       </div>
-    </div>
 
-    <!-- 名前 -->
-    <label for="name">お名前</label>
-    <input type="text" id="name" name="name" required>
+      <!-- 名前 -->
+      <label for="name">お名前</label>
+      <input type="text" id="name" name="name" required>
 
-    <!-- フリガナ -->
-    <label for="kana">お名前(フリガナ)</label>
-    <input type="text" id="kana" name="kana" pattern="[\u30A0-\u30FF]+" title="カタカナのみ入力してください" required>
+      <!-- フリガナ -->
+      <label for="kana">お名前（フリガナ）</label>
+      <input type="text" id="kana" name="kana" pattern="[\u30A0-\u30FF]+" title="カタカナのみ入力してください" required>
 
-    <!-- 性別 -->
-    <div class="row">
+      <!-- 性別 -->
       <label>性別</label>
       <div class="radio-group column">
         <div class="radio-item">
@@ -46,58 +51,63 @@
           <label for="radio-e">回答しない</label>
         </div>
       </div>
-    </div>
 
-    <!-- ログインID -->
-    <label for="login-id">ログインID</label>
-    <input type="text" id="login-id" name="login-id" pattern="^[0-9]+$" required>
-    <div id="id-error" class="error-message"></div>
+      <!-- ログインID -->
+      <label for="login-id">ログインID</label>
+      <input type="text" id="login-id" name="login-id" pattern="^[0-9]+$" required>
+      <p id="id-error" class="error" style="display: none;">⚠ このログインIDはすでに使われています。</p>
 
-    <!-- パスワード -->
-    <label for="password">パスワード</label>
-    <input type="password" id="password" name="password" pattern="^[0-9]+$" required>
+      <!-- パスワード -->
+      <label for="password">パスワード</label>
+      <input type="password" id="password" name="password" pattern="^[0-9]+$" required>
 
-    <!-- パスワード確認 -->
-    <label for="passwordconfirm">パスワード(確認用)</label>
-    <input type="password" id="passwordconfirm" name="passwordconfirm" pattern="^[0-9]+$" required>
-    <div id="password-error" class="error-message"></div>
+      <!-- パスワード確認 -->
+      <label for="passwordconfirm">パスワード（確認用）</label>
+      <input type="password" id="passwordconfirm" name="passwordconfirm" pattern="^[0-9]+$" required>
+      <p id="password-error" class="error" style="display: none;">⚠ パスワードが一致していません。</p>
 
-    <div id="form-message" class="success-message"></div>
+      <p id="form-message" class="error" style="display: none;">⚠ サーバーに接続できませんでした。</p>
 
-    <button class="btn2" type="submit">送信</button>
-  </form>
-</main>
+      <button class="btn2" type="submit">登録</button>
+    </form>
+  </main>
 
-<script>
-  document.getElementById('residentForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
+  <script>
+    const form = document.getElementById("residentForm");
+    const password = document.getElementById("password");
+    const confirmPassword = document.getElementById("passwordconfirm");
+    const loginId = document.getElementById("login-id");
+    const passwordError = document.getElementById("password-error");
+    const idError = document.getElementById("id-error");
+    const formMessage = document.getElementById("form-message");
 
-    document.getElementById('password-error').textContent = "";
-    document.getElementById('id-error').textContent = "";
-    document.getElementById('form-message').textContent = "";
+    form.addEventListener("submit", async function(event) {
+      passwordError.style.display = "none";
+      idError.style.display = "none";
+      formMessage.style.display = "none";
 
-    const pw = document.getElementById('password').value;
-    const pwConfirm = document.getElementById('passwordconfirm').value;
-    const loginId = document.getElementById('login-id').value;
-
-    let hasError = false;
-
-    if (pw !== pwConfirm) {
-      document.getElementById('password-error').textContent = "パスワードが一致しません";
-      return false;
-    }
-
-    try {
-      const res = await fetch("get_registered_ids.php");
-      const registeredIds = await res.json();
-
-      if (registeredIds.includes(loginId)) {
-        document.getElementById('id-error').textContent = "このログインIDはすでに使われています";
-        hasError = true;
+      if (password.value !== confirmPassword.value) {
+        event.preventDefault();
+        passwordError.style.display = "block";
+        confirmPassword.style.border = "2px solid red";
+        return;
       }
-    } catch (error) {
-      document.getElementById('form-message').textContent = "サーバーに接続できませんでした。";
-      hasError = true;
-    }
-  });
-</script>
+
+      try {
+        const res = await fetch("get_registered_ids.php");
+        const registeredIds = await res.json();
+
+        if (registeredIds.includes(loginId.value)) {
+          event.preventDefault();
+          idError.style.display = "block";
+          loginId.style.border = "2px solid red";
+        }
+      } catch (error) {
+        event.preventDefault();
+        formMessage.style.display = "block";
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -4,12 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>親族情報入力画面</title>
-  <link rel="stylesheet" href="style2.css">
+  <title>親族新規登録画面</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>親族情報入力画面</h1>
+  <h1>新規登録画面</h1>
 
   <form id="infoForm" action="親族情報登録完了.jsp" method="post">
     <!-- ログインID -->
