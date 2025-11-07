@@ -6,7 +6,6 @@ public class Login extends Dao {
 		List<Login> list=new ArrayList<>();
 
 	public static void main(String[] args) {
-		// TODO 自動生成されたメソッド・スタブ
 
 	}
 
