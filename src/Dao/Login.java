@@ -11,3 +11,7 @@ public class Login extends Dao {
 	}
 
 }
+
+
+入居者、親族、介護士で作るDaoとBeanをわける
+システム開発のやつが使える
