@@ -1,9 +1,12 @@
 package bean;
 
 import java.io.Serializable;
+
+
 					/*** 商品テーブル＋カテゴリーテーブル*/
+
+
 public class Shouhin implements Serializable {
-	/**商品テーブル**/
 	/**
 	 * 商品ID:char
 	 */
@@ -12,7 +15,7 @@ public class Shouhin implements Serializable {
 	/**
 	 * 商品名:String
 	 */
-	private char goods_name;
+	private String goods_name;
 
 	/**
 	 * 値段:int
@@ -20,15 +23,19 @@ public class Shouhin implements Serializable {
 	private int price;
 
 	/**
-	 * カテゴリー:char
+	 * カテゴリーID:char
 	 */
 	private char category_id;
-	
+
+	/**
+	 * カテゴリー名:String
+	 */
+	private String category_name;
+
 	/**
 	 * 在庫数:int
 	 */
 	private int stock;
-
 
 
 	/**
@@ -42,11 +49,11 @@ public class Shouhin implements Serializable {
 		this.goods_id = goods_id;
 	}
 
-	public char getGoods_name() {
+	public String getGoods_name() {
 		return goods_name;
 	}
 
-	public void setGoods_name(char goods_name) {
+	public void setGoods_name(String goods_name) {
 		this.goods_name = goods_name;
 	}
 
@@ -65,7 +72,15 @@ public class Shouhin implements Serializable {
 	public void setCategory_id(char category_id) {
 		this.category_id = category_id;
 	}
-	
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
 	public int getStock() {
 		return stock;
 	}
