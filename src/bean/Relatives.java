@@ -2,9 +2,12 @@ package bean;
 
 import java.io.Serializable;
 
-					/*** 入居者テーブル*/
+					/*** 親族テーブル*/
 
-public class Resi implements Serializable {
+public class Relatives implements Serializable {
+
+	/**親族ID**/
+	private String rt_id;
 
 	/**入居者ID**/
 	private String rd_id;
@@ -12,11 +15,8 @@ public class Resi implements Serializable {
 	/**氏名**/
 	private String name;
 
-	/**コースID**/
-	private String course_id;
-
-	/**性別**/
-	private String gender;
+	/**メールアドレス**/
+	private String e_mail;
 
 	/**パスワード**/
 	private String password;
@@ -24,6 +24,14 @@ public class Resi implements Serializable {
 	/**
 	 * ゲッター・セッター
 	 */
+
+	public String getRt_id() {
+		return rt_id;
+	}
+
+	public void setRt_id(String rt_id) {
+		this.rt_id = rt_id;
+	}
 
 	public String getrd_id() {
 		return rd_id;
@@ -41,28 +49,20 @@ public class Resi implements Serializable {
 		this.name = name;
 	}
 
-	public String getCourse_id() {
-		return course_id;
-	}
-
-	public void setCourse_id(String course_id) {
-		this.course_id = course_id;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getE_mail() {
+		return e_mail;
+	}
+
+	public void setE_mail(String e_mail) {
+		this.e_mail = e_mail;
 	}
 
 }
